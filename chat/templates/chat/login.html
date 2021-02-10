@@ -7,18 +7,15 @@
 
     <h1>Login</h1>
 
-    <form action="{% url 'loginuser' %}" method"POST">
+    <form action="" method="POST">
     {% csrf_token %}
-    Username:
+    <input type="text" name="username" placeholder="username..." class="form-control">
     <br>
-    <input type="text" name="username" id="">
+    <input type="password" name="password" placeholder="Password..." class="form-control">
     <br>
-    Password:
-    <br>
-    <input type="password" name="password1" id="">
-    <br>
-    <br>
-    <input class="btn btn-primary" type="submit" name="Login" id="">
+
+
+    <input type="submit" name="Login User" id="">
     </form>
 
 {% endblock  %}

@@ -7,7 +7,43 @@
 
     <h1>Sign Up To Chat</h1>
 
-    <form  method="POST" action="{% url 'signupuser' %}">
+    <form action="" method="POST">
+    {% csrf_token %}
+    {{ form.username.label }}
+    <br>
+    {{ form.username }}
+    <br>
+    <br>
+    {{ form.first_name.label }}
+    <br>
+    {{ form.first_name }}
+    <br>
+    <br>
+    {{ form.last_name.label }}
+    <br>
+    {{ form.last_name }}
+    <br>
+    <br>
+    {{ form.email.label }}
+    <br>
+    {{ form.email }}
+    <br>
+    <br>
+    {{ form.password1.label }}
+    <br>
+    {{ form.password1 }}
+    <br>
+    <br>
+    {{ form.password2.label }}
+    <br>
+    {{ form.password2 }}
+    <br>
+    <br>
+
+    <input type="submit" name="Create User" id="">
+    </form>
+
+{% comment %}     <form  method="POST" action="{% url 'signupuser' %}">
     {% csrf_token %}
     First Name:
     <br>
@@ -31,6 +67,6 @@
     <br>
     <br>
     <button class="btn btn-primary" type="submit" name="signup"></button>
-    </form>
+    </form> {% endcomment %}
 
 {% endblock  %}

@@ -23,7 +23,7 @@
       {% if user.is_authenticated %}
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <form style="" action="" method="POST">
+            <form style="" action="{% url 'logoutuser' %}" method="POST">
               {% csrf_token %}
               <button id="signOutBtn" type="submit">Logout</button>
             </form>
