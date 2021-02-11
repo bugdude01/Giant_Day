@@ -23,6 +23,11 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('home/', views.home, name='home'),
 
+    # chat
+    path('allchats/', views.allchats, name='allchats'),
+    path('startchat/', views.newchats, name='newchats'),
+    path('chat/<int:topic_pk>/', views.viewtopic, name='viewtopic'),
+
     # Auth
     path('accounts/', include('django.contrib.auth.urls')),
     path('signup/', views.signupuser, name='signupuser'),

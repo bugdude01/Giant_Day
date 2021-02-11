@@ -4,8 +4,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
-from .models import Chat
-from .forms import CreateUserForm, LoginUserForm
+from .models import Chat, Topic
+from .forms import CreateUserForm, LoginUserForm, TopicForm
 from django.contrib import messages
 
 # Create your views here.
@@ -48,3 +48,29 @@ def logoutuser(request):
     if request.method == 'POST':
         logout(request)
         return redirect('home')
+
+
+def newchats(request):
+    form = TopicForm(request.POST)
+
+    if request.method == 'GET':
+        return render(request, 'chat/startchat.html', {'form': form})
+
+    else:
+        form = TopicForm(request.POST)
+        newtopic = form.save(commit=False)
+        newtopic.user = request.user
+        newtopic.save()
+        return redirect('allchats')
+
+    return render(request, 'chat/startchat.html', {'form': form})
+
+
+def allchats(request):
+    topics = Topic.objects.all()
+    return render(request, 'chat/allchats.html', {'topics': topics})
+
+
+def viewtopic(request, topic_pk):
+    topic = get_object_or_404(Topic, pk=topic_pk)
+    return render(request, 'chat/viewtopic.html', {'topic': topic})
