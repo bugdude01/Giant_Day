@@ -4,7 +4,7 @@
 
 <h2>{{ error }}</h2>
 
-
+<div class="container">
     <h1>Sign Up To Chat</h1>
 
     <form action="" method="POST">
@@ -42,31 +42,6 @@
 
     <input type="submit" name="Create User" id="">
     </form>
-
-{% comment %}     <form  method="POST" action="{% url 'signupuser' %}">
-    {% csrf_token %}
-    First Name:
-    <br>
-    <input type="text" name="first_name">
-    <br>
-    Last Name:
-    <br>
-    <input type="text" name="last_name">
-    <br>
-    Email:
-    <br>
-    <input type="text" name="email">
-    <br>
-    Password:
-    <br>
-    <input type="password" name="password1">
-    <br>
-    Re-enter password:
-    <br>
-    <input type="password" name="password2">
-    <br>
-    <br>
-    <button class="btn btn-primary" type="submit" name="signup"></button>
-    </form> {% endcomment %}
+</div>
 
 {% endblock  %}

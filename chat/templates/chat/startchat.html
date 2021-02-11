@@ -2,6 +2,18 @@
 
 {% block content %}
 
-Start a new chat
+<form action="" method="POST">
+{% csrf_token %}
+Chat Title
+<br>
+{{ form.title}}
+<br>
+Chat topic
+<br>
+{{ form.body}}
+<br>
+<br>
+<input type="submit" value="Submit" name="">
+</form>
 
 {% endblock  %}
