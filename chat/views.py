@@ -4,9 +4,12 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
-from .models import Chat, Topic
-from .forms import CreateUserForm, LoginUserForm, TopicForm
+from .models import Chat
+from .forms import LoginUserForm, ChatForm
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, ListView
+from accounts.forms import CreateUser
 
 # Create your views here.
 
@@ -16,10 +19,10 @@ def home(request):
 
 
 def signupuser(request):
-    form = CreateUserForm()
+    form = CreateUser()
 
     if request.method == 'POST':
-        form = CreateUserForm(request.POST)
+        form = CreateUser(request.POST)
         if form.is_valid():
             form.save()
             user = form.cleaned_data.get('username')
@@ -50,7 +53,26 @@ def logoutuser(request):
         return redirect('home')
 
 
-def newchats(request):
+class NewChatView(LoginRequiredMixin, CreateView):
+    login_url = 'accounts:login'
+    form_class = ChatForm
+    model = Chat
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
+
+class ChatListView(LoginRequiredMixin, ListView):
+    model = Chat
+
+    def get_queryset(self):
+        return Chat.objects.filter(posted_at__lte=timezone.now()).order_by('posted_at')
+
+
+""" def newchats(request):
     form = TopicForm(request.POST)
 
     if request.method == 'GET':
@@ -63,7 +85,7 @@ def newchats(request):
         newtopic.save()
         return redirect('allchats')
 
-    return render(request, 'chat/startchat.html', {'form': form})
+    return render(request, 'chat/startchat.html', {'form': form}) """
 
 
 def allchats(request):

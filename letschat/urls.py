@@ -17,16 +17,18 @@ from django.contrib import admin
 from django.urls import path, include
 from chat import views
 from django.contrib.auth import views as auth_views
+from chat.views import NewChatView, ChatListView
 
 urlpatterns = [
+    path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('home/', views.home, name='home'),
 
     # chat
-    path('allchats/', views.allchats, name='allchats'),
-    path('startchat/', views.newchats, name='newchats'),
-    path('chat/<int:topic_pk>/', views.viewtopic, name='viewtopic'),
+    path('allchats/', ChatListView.as_view(), name='allchats'),
+    path('startchat/', NewChatView.as_view(), name='newchats'),
+    #path('chat/<int:topic_pk>/', views.viewtopic, name='viewtopic'),
 
     # Auth
     path('accounts/', include('django.contrib.auth.urls')),

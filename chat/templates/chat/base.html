@@ -32,10 +32,10 @@
       {% else %}
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="{% url 'signupuser' %}">Sign Up</a>
+          <a class="nav-link" aria-current="page" href="{% url 'accounts:signup' %}">Sign Up</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'loginuser' %}">Login</a>
+          <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
         </li>
       </ul>
       {% endif %}
